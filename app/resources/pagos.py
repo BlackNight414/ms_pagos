@@ -24,8 +24,9 @@ def registrar_pago():
 @pagos.route('/eliminar_pago/<int:pago_id>', methods=['DELETE'])
 def eliminar_pago(pago_id):
     try:
-        pagos_service.eliminar_pago(pago_id)
-        return jsonify({'msg': 'Pago eliminado'}), 200
+        observaciones = request.get_json()['observaciones']
+        pagos_service.eliminar_pago(pago_id, observaciones)
+        return jsonify({'msg': f'Pago con id={pago_id} eliminado'}), 200
     except:
         return jsonify({'msg': 'Error'}), 500
 
